@@ -12,7 +12,7 @@ function MainSection() {
             The easiest way to convert your files
           </div>
         </div>
-        <div className="pb-7 lg:h-4/6">
+        <div className="pb-7 lg:pb-10 xl:h-5/6">
           <InputSection />
         </div>
       </div>
