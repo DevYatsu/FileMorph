@@ -63,8 +63,6 @@ pub fn get_output_formats(input_format: &str) -> String {
 
     let adapted_name: String = to_pascal_case(&input_format.to_lowercase());
 
-    println!("input format {}", adapted_name);
-
     match adapted_name.as_str() {
         "Png" => serde_json::to_string(&supported_string_formats(PngConverter.supported_formats())).unwrap(),
         "Jpeg" => serde_json::to_string(&supported_string_formats(JpegConverter.supported_formats())).unwrap(),
