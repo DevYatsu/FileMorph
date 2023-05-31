@@ -1,5 +1,5 @@
 use converter_buddy::{io::ConvertibleFile, format::Format, converter::{ConversionError, Converter}};
-use std::{fs::{self, File}, io::{Read, Write}};
+use std::{fs::{File}, io::{Read, Write}};
 
 use crate::files_utils::get_format;
 
