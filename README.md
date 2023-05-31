@@ -4,10 +4,10 @@ FileMorph is a powerful file conversion application that allows you to convert f
 
 ## Features
 
-### Easy-to-Use Interface: 
+#### Easy-to-Use Interface: 
 The application offers a user-friendly interface that makes it effortless to select files, choose the desired output format, and initiate the conversion process.
 
-### Cross-Platform Compatibility: 
+#### Cross-Platform Compatibility: 
 FileMorph is compatible with Apple devices and Linux systems, enabling users to access and use the application across multiple platforms.
 
 
