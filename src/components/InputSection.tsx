@@ -63,6 +63,7 @@ function InputSection() {
     setIsFileSelected: setIsInputFileSelected,
     fileName: inputFileName,
     filePath: inputFilePath,
+    fileExtension: inputFileExtension,
   } = useFile();
 
   const {
