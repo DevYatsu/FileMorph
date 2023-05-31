@@ -217,12 +217,6 @@ function InputSection() {
 
           setOutputFilePath(path);
 
-          console.log({
-            path: inputFilePath,
-            outputFormat: outputFormat,
-            output_path: path,
-          });
-
           const convertion = await invoke("convert_file", {
             path: inputFilePath,
             outputFormat: outputFormat,
@@ -269,7 +263,10 @@ function InputSection() {
                 <div className="flex flex-col items-center ">
                   <ErrorAlert title={error} desc="Please try again" />
                   <RefreshButton
-                    setFalse={setIsInputFileSelected}
+                    setFalse={(f: false) => {
+                      setIsInputFileSelected(f);
+                      setOutputFileConverted(f);
+                    }}
                     setNull={setError}
                     className="py-4"
                   />
