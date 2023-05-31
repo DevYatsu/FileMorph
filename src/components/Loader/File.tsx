@@ -1,4 +1,4 @@
-import "./FileLoader.css";
+import "./styles.css";
 
 export default function FileLoader() {
   return (

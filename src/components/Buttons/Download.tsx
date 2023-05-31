@@ -1,5 +1,5 @@
 import { ReactEventHandler } from "react";
-import "./downloadButton.css";
+import "./styles.css";
 
 export default function DownloadButton({
   text,

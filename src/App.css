@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  @apply text-black bg-slate-200 dark:text-white dark:bg-slate-900 h-full;
+}
+body {
+  @apply h-full;
+}
+div#root {
+  @apply h-full;
+}
+
 @keyframes bounce {
   50% {
     transform: rotate(5deg) translate(20px, -50px);

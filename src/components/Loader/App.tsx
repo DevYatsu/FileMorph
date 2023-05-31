@@ -1,4 +1,4 @@
-import "./AppLoader.css";
+import "./styles.css";
 
 export default function AppLoader() {
   return (
