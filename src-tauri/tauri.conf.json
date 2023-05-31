@@ -13,18 +13,8 @@
   "tauri": {
     "allowlist": {
       "all": false,
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "fs": {
-        "all": true,
-        "scope": ["**"]
-      },
+      "dialog": { "all": false, "open": true, "save": true },
       "path": {
-        "all": true
-      },
-      "dialog": {
         "all": true
       }
     },
