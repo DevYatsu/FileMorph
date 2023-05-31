@@ -1,6 +1,21 @@
 import { useEffect, useState } from "react";
 import { getFileInfos } from "../async/fs";
 
+function sanitizePathExtension(filepath: string | null): string {
+  if (!filepath) return "";
+
+  const lastDotIndex = filepath.lastIndexOf(".");
+
+  if (lastDotIndex !== -1) {
+    const filename = filepath.substring(0, lastDotIndex);
+    const extension = filepath.substring(lastDotIndex);
+    const lowercaseExtension = extension.toLowerCase();
+    return filename + lowercaseExtension;
+  }
+
+  return filepath;
+}
+
 export default function useFile(path?: string) {
   const [fileInfo, setFileInfo] = useState<{
     filePath: string | null;
@@ -47,7 +62,7 @@ export default function useFile(path?: string) {
   const setFilePath = (newPath: string | null) => {
     setFileInfo((prevFileInfo) => ({
       ...prevFileInfo,
-      filePath: newPath,
+      filePath: sanitizePathExtension(newPath),
     }));
     setIsFileSelected(true);
   };
