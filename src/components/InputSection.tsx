@@ -78,14 +78,20 @@ function InputSection() {
     setConvertionChoices,
   } = useFormat();
 
-  const [info, setInfo] = useState<{ title: string; description: string }>({
-    title: "",
-    description: "",
+  const [info, setInfo] = useState<{
+    title: string | null;
+    description: string | null;
+  }>({
+    title: null,
+    description: null,
   });
-  const [error, setError] = useState("");
-  const [warning, setWarning] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [warning, setWarning] = useState<string | null>(null);
 
   const manageFileInput = async (filepath: string) => {
+    setError(null);
+    setOutputFormat(null);
+
     try {
       const { name, extension, displayName } = getFileInfos(filepath);
       setInfo({
@@ -163,7 +169,7 @@ function InputSection() {
   const handleClick = async function () {
     try {
       setIsAppLoading(true);
-      setError("");
+      setError(null);
 
       const filepath = await selectFile();
 
@@ -183,8 +189,8 @@ function InputSection() {
 
   const handleSelectChange = function (v: string) {
     if (!v) return;
-    setWarning("");
-    setError("");
+    setWarning(null);
+    setError(null);
     setOutputFormat(v);
     setInfo({
       title: `Convert '${formattedInputFileName}' to ${v}`,
@@ -196,7 +202,7 @@ function InputSection() {
     if (!outputFormat) {
       return;
     }
-    setWarning("");
+    setWarning(null);
     setisFileLoading(true);
 
     try {
@@ -210,8 +216,6 @@ function InputSection() {
           const { extension: outputExtension } = getFileInfos(path);
 
           setOutputFilePath(path);
-          //just need to copy to path the inputfile, convert it so there is the output file there
-          //and then just remove the copied input file
 
           console.log({
             path: inputFilePath,
@@ -242,7 +246,7 @@ function InputSection() {
             setError("Error during convertion");
           }
         } else {
-          setInfo({ title: "", description: "" });
+          setInfo({ title: null, description: null });
           setWarning("No file path selected. Please select one.");
         }
       }
@@ -261,7 +265,7 @@ function InputSection() {
         <>
           {isInputFileSelected ? (
             <div className="w-full min-h-full pb-4 rounded-lg md:justify-center md:pt-5 bg-slate-800 md:flex md:items-center ">
-              {error !== "" ? (
+              {error !== null ? (
                 <div className="flex flex-col items-center ">
                   <ErrorAlert title={error} desc="Please try again" />
                   <RefreshButton
@@ -282,10 +286,10 @@ function InputSection() {
                     actionDone={isOutputFileConverted}
                     className="self-center px-5 pb-4"
                   />
-                  {warning !== "" && (
+                  {warning !== null && (
                     <WarningAlert title={warning} desc={"Try again"} />
                   )}
-                  {info.title !== "" && (
+                  {info.title !== null && info.description !== null && (
                     <SuccessAlert title={info.title} desc={info.description} />
                   )}
                   {isOutputFileConverted ? (
