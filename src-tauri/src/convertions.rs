@@ -39,7 +39,7 @@ impl ConvertionFeatures for ConvertibleFile {
 
 #[tauri::command]
 pub fn convert_file(path: &str, output_format: &str, output_path: &str) -> bool {
-    let file: ConvertibleFile = ConvertibleFile::new(path.to_lowercase().as_str());
+    let file: ConvertibleFile = ConvertibleFile::new(path);
     file.format().expect("error in the input format");
     let target_format: Format = get_format(output_format).unwrap();
 
