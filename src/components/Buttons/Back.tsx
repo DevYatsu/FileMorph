@@ -16,7 +16,7 @@ export default function BackButton({
   className?: string;
 }) {
   return (
-    <div className={className}>
+    <div className={`text-slate-800 dark:text-white ${className}`}>
       <button
         className="back-button"
         onClick={() => {

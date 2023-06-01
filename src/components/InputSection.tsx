@@ -253,7 +253,7 @@ function InputSection() {
   };
 
   return (
-    <div className="flex items-center justify-center w-full h-full rounded-md sm:rounded-lg">
+    <div className="flex items-center justify-center w-full h-full pb-3 rounded-md sm:rounded-lg">
       {isAppLoading ? (
         <AppLoader />
       ) : (
@@ -273,7 +273,7 @@ function InputSection() {
                   />
                 </div>
               ) : (
-                <div className="flex flex-col items-center h-full">
+                <div className="flex flex-col items-center w-full h-full">
                   <BackButton
                     setFalse={(f: false) => {
                       setOutputFileConverted(f);
