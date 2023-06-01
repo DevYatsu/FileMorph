@@ -259,7 +259,7 @@ function InputSection() {
       ) : (
         <>
           {isInputFileSelected ? (
-            <div className="w-full min-h-full pb-4 rounded-lg md:justify-center md:pt-5 bg-slate-800 md:flex md:items-center ">
+            <div className="w-full min-h-full pb-4 rounded-lg md:justify-center md:pt-5 bg-slate-200 dark:bg-slate-800 md:flex md:items-center ">
               {error !== null ? (
                 <div className="flex flex-col items-center ">
                   <ErrorAlert title={error} desc="Please try again" />

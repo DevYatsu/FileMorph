@@ -15,7 +15,7 @@ function SuccessAlert({ title, desc }: { title: string; desc: string }) {
       justifyContent="center"
       textAlign="center"
       maxHeight="135px"
-      className="w-full max-w-2xl px-2 py-3 bg-green-500 border border-white rounded-sm"
+      className="w-full max-w-2xl px-2 py-3 bg-green-500 border border-white rounded-sm dark:text-white"
     >
       <AlertIcon boxSize="20px" mt={10} />
       <AlertTitle

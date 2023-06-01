@@ -21,7 +21,7 @@ export default function ErrorAlert({
       justifyContent="center"
       textAlign="center"
       height="135px"
-      className="w-5/6 max-w-2xl px-2 py-3 bg-red-500 border border-white rounded-sm"
+      className="w-5/6 max-w-2xl px-2 py-3 bg-red-500 border border-white rounded-sm dark:text-white"
     >
       <AlertIcon boxSize="20px" />
       <AlertTitle
