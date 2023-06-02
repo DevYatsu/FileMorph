@@ -1,5 +1,5 @@
 use converter_buddy::{io::ConvertibleFile, format::Format, converter::{ConversionError, Converter}};
-use std::{fs::{File}, io::{Read, Write}};
+use std::{fs::File, io::{Read, Write}};
 
 use crate::files_utils::get_format;
 
@@ -37,7 +37,7 @@ impl ConvertionFeatures for ConvertibleFile {
 
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn convert_file(path: &str, output_format: &str, output_path: &str) -> bool {
     let file: ConvertibleFile = ConvertibleFile::new(path);
     file.format().expect("error in the input format");
