@@ -1,13 +1,10 @@
 import "./Navbar.scss";
 import { FaGithub } from "react-icons/fa";
+import { SiConvertio } from "react-icons/si";
 
 function NavLogo() {
   return (
-    <img
-      className="transition nav-logo h-5/6 bg-inherit rotate-12 hover:-rotate-12"
-      src="/nav-logo.png"
-      alt="nav-logo"
-    />
+    <SiConvertio className="w-14 h-full transition rotate-[38deg] hover:rotate-[96deg] text-indigo-400" />
   );
 }
 
@@ -21,11 +18,11 @@ function GitLink() {
 
 function Navbar() {
   return (
-    <nav className="w-full h-24 bg-orange-200 border-gray-200 dark:bg-orange-700">
+    <nav className="w-full h-24 border-gray-200 bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 ">
       <div className="flex flex-wrap items-center justify-center h-full mx-auto">
         <div className="flex items-center h-full">
           <NavLogo />
-          <span className="self-center pl-3 text-2xl font-semibold select-none whitespace-nowrap dark:text-white">
+          <span className="z-10 self-center pl-2 space-x-2 text-2xl font-bold tracking-wider text-transparent select-none bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600">
             FileMorph
           </span>
           <div className="absolute right-5 md:right-12">
