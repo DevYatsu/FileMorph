@@ -63,13 +63,13 @@ function InputSection() {
     setIsFileSelected: setIsInputFileSelected,
     fileName: inputFileName,
     filePath: inputFilePath,
-    fileExtension: inputFileExtension,
   } = useFile();
 
   const {
     setFilePath: setOutputFilePath,
     setIsFileSelected: setOutputFileConverted,
     isFileSelected: isOutputFileConverted,
+    filePath: outputFilePath,
   } = useFile();
 
   const {
@@ -90,9 +90,12 @@ function InputSection() {
   const [warning, setWarning] = useState<string | null>(null);
 
   const manageFileInput = async (filepath: string) => {
+    setWarning(null);
     setError(null);
     setOutputFormat(null);
+    setOutputFilePath(null);
     setOutputFileConverted(false);
+    setInfo({ title: null, description: null });
 
     try {
       const { name, extension, displayName } = getFileInfos(filepath);
@@ -183,7 +186,7 @@ function InputSection() {
 
       manageFileInput(filepath);
     } catch (e) {
-      return e;
+      console.error(e);
     } finally {
       setIsAppLoading(false);
     }
@@ -191,9 +194,9 @@ function InputSection() {
 
   const handleSelectChange = function (v: string) {
     if (!v) return;
+    setOutputFormat(v);
     setWarning(null);
     setError(null);
-    setOutputFormat(v);
     setisFileLoading(false);
     setInfo({
       title: `Convert '${formattedInputFileName}' to ${v}`,
@@ -205,33 +208,38 @@ function InputSection() {
     if (!outputFormat) {
       return;
     }
+
     setWarning(null);
-    setisFileLoading(true);
+    setInfo({
+      title: `Convert '${formattedInputFileName}' to ${outputFormat}`,
+      description: "Click Below to convert",
+    });
 
     try {
       if (inputFileName && outputFormat) {
-        setInfo({
-          title: `Convert '${formattedInputFileName}' to ${outputFormat}`,
-          description: "Click Below to convert",
-        });
-
         const path = await getSavePath(
           inputFileName,
           outputFormat.toLowerCase()
         );
+        setInfo({
+          title: `Conversion to ${outputFormat} starting`,
+          description: "Processing file...",
+        });
+        setisFileLoading(true);
 
         if (path) {
           const { extension: outputExtension } = getFileInfos(path);
 
           setOutputFilePath(path);
 
-          const convertion = await invoke("convert_file", {
+          const convertion: boolean = await invoke("convert_file", {
             path: inputFilePath,
             outputFormat: outputFormat,
             outputPath: path,
           });
 
           if (convertion) {
+            setOutputFileConverted(true);
             setInfo({
               title: `'${formattedInputFileName}' has been converted ${
                 outputExtension
@@ -243,17 +251,22 @@ function InputSection() {
               }`,
               description: "Thanks for using our services",
             });
-            setOutputFileConverted(true);
           } else {
-            setError("Error during convertion");
+            setError("Error during conversion");
+            setOutputFileConverted(false);
           }
         } else {
-          setInfo({ title: null, description: null });
           setWarning("No file path selected. Please select one.");
+          setInfo({
+            title: null,
+            description: null,
+          });
+          setOutputFileConverted(false);
         }
       }
     } catch (e) {
-      return e;
+      setError("Error during conversion");
+      setOutputFileConverted(false);
     } finally {
       setisFileLoading(false);
     }
@@ -267,7 +280,7 @@ function InputSection() {
         <>
           {isInputFileSelected ? (
             <div className="w-full min-h-full pb-4 rounded-lg md:justify-center md:pt-5 bg-slate-200 dark:bg-slate-800 md:flex md:items-center ">
-              {error !== null ? (
+              {error ? (
                 <div className="flex flex-col items-center ">
                   <ErrorAlert title={error} desc="Please try again" />
                   <RefreshButton
@@ -281,50 +294,46 @@ function InputSection() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center w-full h-full">
-                  <BackButton
-                    setFalse={(f: false) => {
-                      setOutputFileConverted(f);
-                      setIsInputFileSelected(f);
-                    }}
-                    setTrueThenFalse={setIsAppLoading}
-                    setNull={setOutputFormat}
-                    actionDone={isOutputFileConverted}
-                    className="self-center px-5 pb-4"
-                  />
+                  {!isFileLoading && (
+                    <BackButton
+                      setFalse={(f: false) => {
+                        setOutputFileConverted(f);
+                        setIsInputFileSelected(f);
+                      }}
+                      setTrueThenFalse={setIsAppLoading}
+                      setNull={setOutputFormat}
+                      actionDone={isOutputFileConverted}
+                      className="self-center px-5 pb-4"
+                    />
+                  )}
                   {warning !== null && (
                     <WarningAlert title={warning} desc={"Try again"} />
                   )}
                   {info.title !== null && info.description !== null && (
-                    <SuccessAlert title={info.title} desc={info.description} />
+                    <div className="flex justify-center w-full h-full pb-6">
+                      <SuccessAlert
+                        title={info.title}
+                        desc={info.description}
+                      />
+                    </div>
                   )}
-                  {isOutputFileConverted ? (
+                  {!isOutputFileConverted && (
                     <>
-                      <RefreshButton
-                        setFalse={(f: false) => {
-                          setIsInputFileSelected(f);
-                          setOutputFileConverted(f);
-                        }}
-                        setNull={setError}
-                        className="py-4"
-                      />
-                    </>
-                  ) : (
-                    <>
-                      <Select
-                        data={
-                          convertionChoices.map((x: string) => {
-                            return { value: x, label: x };
-                          }) || []
-                        }
-                        defaultValue={"Select Format"}
-                        OnChange={handleSelectChange}
-                        className="w-1/2 max-w-lg py-10 lg:py-16"
-                      />
+                      {!outputFilePath && !isFileLoading && (
+                        <Select
+                          data={
+                            convertionChoices.map((x: string) => {
+                              return { value: x, label: x };
+                            }) || []
+                          }
+                          defaultValue={"Select Format"}
+                          OnChange={handleSelectChange}
+                          className="w-1/2 max-w-lg py-3 lg:py-10 2xl:py-14"
+                        />
+                      )}
                       {outputFormat !== null && (
                         <div className="pb-12">
-                          {isFileLoading ? (
-                            <Loader />
-                          ) : (
+                          {!isFileLoading && (
                             <DownloadButton
                               onClick={handleConvertButtonClick}
                               text={`${
@@ -339,6 +348,7 @@ function InputSection() {
                       )}
                     </>
                   )}
+                  {isFileLoading && <Loader />}
                 </div>
               )}
             </div>
