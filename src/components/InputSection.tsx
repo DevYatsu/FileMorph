@@ -92,6 +92,7 @@ function InputSection() {
   const manageFileInput = async (filepath: string) => {
     setError(null);
     setOutputFormat(null);
+    setOutputFileConverted(false);
 
     try {
       const { name, extension, displayName } = getFileInfos(filepath);
