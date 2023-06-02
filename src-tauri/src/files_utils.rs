@@ -37,7 +37,7 @@ fn supported_string_formats(formats_vec: Vec<Format>) -> Vec<String> {
         string_formats
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn get_supported_input_formats() -> String{
     serde_json::to_string(&supported_string_formats(Format::supported_formats())).unwrap()
 }
@@ -57,7 +57,7 @@ pub fn is_file_format_valid(input_format: &str) -> bool {
     false
 }
 
-#[tauri::command]
+#[tauri::command(async)]
 pub fn get_output_formats(input_format: &str) -> String {
     let vec: Vec<String> = Vec::new();
 
