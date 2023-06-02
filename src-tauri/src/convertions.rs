@@ -1,17 +1,14 @@
 use converter_buddy::{io::ConvertibleFile, format::Format, converter::{ConversionError, Converter}};
-use std::{fs::{File}, io::{Read, Write}};
+use std::{fs::File, io::{Read, Write}};
 
 use crate::files_utils::get_format;
-use async_trait::async_trait;
 
-#[async_trait]
 trait ConvertionFeatures {
-    async fn convert_with_target(&self, target_format: Format, output_path: &str) ->Result<File, ConversionError>;
+    fn convert_with_target(&self, target_format: Format, output_path: &str) ->Result<File, ConversionError>;
 }
 
-#[async_trait]
 impl ConvertionFeatures for ConvertibleFile {
-    async fn convert_with_target(&self, target_format: Format, output_path: &str) -> Result<File, ConversionError> {
+    fn convert_with_target(&self, target_format: Format, output_path: &str) -> Result<File, ConversionError> {
         let source_format = self.format().ok_or(ConversionError::UnknownSourceFormat)?;
 
         // let target_format_ext = target_format.info().preferred_extension;
@@ -41,12 +38,12 @@ impl ConvertionFeatures for ConvertibleFile {
 }
 
 #[tauri::command(async)]
-pub fn convert_file(path: &str, output_format: &str, output_path: &str) -> Result<bool, bool> {
+pub fn convert_file(path: &str, output_format: &str, output_path: &str) -> bool {
     let file: ConvertibleFile = ConvertibleFile::new(path);
     file.format().expect("error in the input format");
     let target_format: Format = get_format(output_format).unwrap();
 
-    match file.convert_with_target(target_format, output_path)? {
+    match file.convert_with_target(target_format, output_path) {
         Ok(_) => true,
         Err(_) => false,
     }
