@@ -194,6 +194,7 @@ function InputSection() {
     setWarning(null);
     setError(null);
     setOutputFormat(v);
+    setisFileLoading(false);
     setInfo({
       title: `Convert '${formattedInputFileName}' to ${v}`,
       description: "Click Below to convert",
@@ -209,6 +210,11 @@ function InputSection() {
 
     try {
       if (inputFileName && outputFormat) {
+        setInfo({
+          title: `Convert '${formattedInputFileName}' to ${outputFormat}`,
+          description: "Click Below to convert",
+        });
+
         const path = await getSavePath(
           inputFileName,
           outputFormat.toLowerCase()
