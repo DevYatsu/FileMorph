@@ -5,10 +5,6 @@ import { useEffect } from "react";
 
 function App() {
   useEffect(() => {
-    if (window.location.hostname !== "tauri.localhost") {
-      return;
-    }
-
     document.addEventListener("contextmenu", (e) => e.preventDefault());
     document.addEventListener("selectstart", (e) => e.preventDefault());
 
