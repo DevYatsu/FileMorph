@@ -16,7 +16,3 @@ FileMorph is compatible with Apple devices and Linux systems, enabling users to 
 
 ## License
 FileMorph is released under the MIT License. Feel free to modify and distribute the application according to the terms of the license.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
