@@ -1,5 +1,5 @@
 import { Select as AntSelect } from "antd";
-import { extensionsChoices } from "../types/types";
+import { extensionsChoices } from "../types/extensionChoices";
 
 type OnChange = (value: string) => any;
 
