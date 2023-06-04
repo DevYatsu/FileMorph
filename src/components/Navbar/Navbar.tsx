@@ -1,4 +1,3 @@
-import "./Navbar.scss";
 import { FaGithub } from "react-icons/fa";
 import { SiConvertio } from "react-icons/si";
 
