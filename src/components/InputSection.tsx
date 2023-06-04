@@ -307,7 +307,9 @@ function InputSection() {
                     />
                   )}
                   {warning !== null && (
-                    <WarningAlert title={warning} desc={"Try again"} />
+                    <div className="flex justify-center w-full h-full pb-6">
+                      <WarningAlert title={warning} desc={"Try again"} />{" "}
+                    </div>
                   )}
                   {info.title !== null && info.description !== null && (
                     <div className="flex justify-center w-full h-full pb-6">
