@@ -8,7 +8,7 @@ function MainSection() {
           <h1 className="px-4 py-2 text-xl font-bold tracking-tight text-center select-none text-slate-900 lg:text-4xl dark:text-white ">
             Welcome on FileMorph, the best file converter out there!
           </h1>
-          <div className="pt-2 pb-12 text-center text-md sm:text-lg text-slate-600 dark:text-slate-400">
+          <div className="pt-2 pb-12 text-center text-md sm:text-lg text-slate-600 dark:text-slate-400 ">
             The easiest way to convert your files
           </div>
         </div>

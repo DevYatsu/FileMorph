@@ -32,7 +32,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.file.morph.dev",
+      "identifier": "com.file.morph",
       "targets": "all"
     },
     "security": {
