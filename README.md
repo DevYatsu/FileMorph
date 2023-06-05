@@ -15,4 +15,4 @@ The application offers a user-friendly interface that makes it effortless to sel
 FileMorph is compatible with Apple devices and Linux systems, enabling users to access and use the application across multiple platforms.
 
 ## Download FileMorph
-[Click Here](https://github.com/DevYatsu/FileMorph/releases/tag/Release) to access and download your OS version of FileMorph.
+[Click Here](https://github.com/DevYatsu/FileMorph/releases/tag/Release) to access the latest version of FileMorph and download it.
