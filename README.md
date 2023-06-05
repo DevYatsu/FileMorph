@@ -14,5 +14,5 @@ The application offers a user-friendly interface that makes it effortless to sel
 #### Cross-Platform Compatibility: 
 FileMorph is compatible with Apple devices and Linux systems, enabling users to access and use the application across multiple platforms.
 
-## License
-FileMorph is released under the MIT License. Feel free to modify and distribute the application according to the terms of the license.
+## Download FileMorph
+[Click Here](https://github.com/DevYatsu/FileMorph/releases/tag/Release) to access and download your OS version of FileMorph.
