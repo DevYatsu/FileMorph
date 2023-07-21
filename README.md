@@ -1,4 +1,4 @@
-# FileMorph: A Nice file converter
+# FileMorph: A powerful file converter
 
 FileMorph is a powerful file conversion application that allows you to convert files between different formats with ease. Right now, FileMorph supports various image file types, thanks to the [converter_buddy](https://github.com/attilio-oliva/converter-buddy) library.
 
